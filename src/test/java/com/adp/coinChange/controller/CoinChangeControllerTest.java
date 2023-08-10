@@ -19,8 +19,6 @@ class CoinChangeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
     void testPostMinimumCoins() throws Exception {

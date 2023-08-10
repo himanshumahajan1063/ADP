@@ -26,6 +26,7 @@ The Coin Change Service is a Spring Boot application that exposes a REST API for
 - Consider inventory of coins
 - The inventory can be easily manged through REST API but we need to be assured that we add security there so that only authorized users can manipulate it
 - Current implementation ignore inventory and gives minimum coins for the amount
+- Swagger documentation
 
 ## Getting Started
 
