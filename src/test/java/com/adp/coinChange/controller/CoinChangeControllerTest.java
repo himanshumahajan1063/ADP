@@ -26,7 +26,7 @@ class CoinChangeControllerTest {
     void testPostMinimumCoins() throws Exception {
         BigDecimal amount = new BigDecimal("4.79");
 
-        mockMvc.perform(post("/change")
+        mockMvc.perform(post("/api/coins/change")
                         .content("4.79")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -39,7 +39,7 @@ class CoinChangeControllerTest {
     void testGetMinimumCoinsWithNoChange() throws Exception {
         BigDecimal amount = new BigDecimal("0.00");
 
-        mockMvc.perform(post("/change")
+        mockMvc.perform(post("/api/coins/change")
                         .content(amount.toString())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -49,7 +49,7 @@ class CoinChangeControllerTest {
 
     @Test
     void testInvalidAmountParameter() throws Exception {
-        mockMvc.perform(post("/change")
+        mockMvc.perform(post("/api/coins/change")
                         .content("invalid")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())

@@ -4,7 +4,7 @@ The Coin Change Service is a Spring Boot application that exposes a REST API for
 
 ## Requirements
 
-- Java 8 or later
+- Java 11 or later
 - Spring Boot 2.x
 - Maven
 
@@ -26,3 +26,22 @@ The Coin Change Service is a Spring Boot application that exposes a REST API for
 - Consider inventory of coins
 - The inventory can be easily manged through REST API but we need to be assured that we add security there so that only authorized users can manipulate it
 - Current implementation ignore inventory and gives minimum coins for the amount
+
+## Getting Started
+
+1. Clone the repository:
+
+   ```shell
+   git clone https://github.com/himanshumahajan1063/ADP.git
+   
+2. Run
+   ```shell
+   mvn spring-boot:run
+   
+3. To run tests
+   ```shell
+   mvn clean test
+4. Sample request
+   curl --location 'localhost:8090/api/coins/change' \
+   --header 'Content-Type: application/json' \
+   --data '6.66'

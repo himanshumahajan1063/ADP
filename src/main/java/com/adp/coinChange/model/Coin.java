@@ -11,4 +11,5 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Coin {
     private BigDecimal value;
+    private Integer inventory;
 }

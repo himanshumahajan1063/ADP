@@ -2,6 +2,7 @@ package com.adp.coinChange.service;
 
 import com.adp.coinChange.Exception.AmountParseException;
 import com.adp.coinChange.Exception.InvalidAmountException;
+import com.adp.coinChange.Utils.CoinUtil;
 import com.adp.coinChange.model.Coin;
 import com.adp.coinChange.model.CoinChangeResponseDto;
 import lombok.extern.slf4j.Slf4j;
@@ -13,14 +14,12 @@ import java.util.*;
 @Slf4j
 @Service
 public class CoinChangeService {
-    //The following can be done in a Utility class as well
-    private final Coin[] coins = {
-            new Coin(new BigDecimal("0.25")),
-            new Coin(new BigDecimal("0.10")),
-            new Coin(new BigDecimal("0.05")),
-            new Coin(new BigDecimal("0.01"))
-    };
 
+    /**
+     * The following method returs the change and denominations used to get amount.
+     * @param amount amount for which change is required.
+     * @return CoinChangeResponseDto
+     */
     public CoinChangeResponseDto getChange(final String amount) {
         log.info("Calculating minimum coins for amount: {}", amount);
 
@@ -33,7 +32,7 @@ public class CoinChangeService {
         Arrays.fill(dp, Integer.MAX_VALUE - 1);
         dp[0] = 0;
 
-        for (Coin coin : coins) {
+        for (Coin coin : CoinUtil.getCoinDetails()) {
             int coinCents = coin.getValue().multiply(new BigDecimal("100")).intValue();
             for (int i = coinCents; i <= targetCents; i++) {
                 if (dp[i - coinCents] + 1 < dp[i]) {
@@ -55,6 +54,11 @@ public class CoinChangeService {
         return CoinChangeResponseDto.builder().coinChangeMap(result).build();
     }
 
+    /**
+     * The following method validates the parsed amount if it is valid or not.
+     * @param amount amount to be validated
+     * @return parsedAmount
+     */
     private static BigDecimal validateAndGetParsedAmount(String amount) {
         BigDecimal parsedAmount;
         try {
